@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>POS Ferretería Central</title>
+    <title>POS Ferretería Central - Evidencia SENA</title>
     <!-- CSS de Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- FontAwesome para Iconos -->
@@ -11,69 +11,180 @@
 </head>
 <body class="bg-light">
 
-    <!-- Barra de Navegación del Sistema POS -->
-    <nav class="navbar navbar-dark bg-dark sticky-top shadow-sm">
+    <!-- Barra de Navegación Superior -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
         <div class="container-fluid">
             <a class="navbar-brand fw-bold" href="#">
                 <i class="fa-solid fa-wrench text-warning me-2"></i>FERRETERÍA CENTRAL - POS
             </a>
-            <div class="text-white">
+            <div class="d-flex text-white align-items-center">
+                <span class="badge bg-secondary me-3"><i class="fa-solid fa-code-branch me-1"></i> GA5-220501095-AA1-EV04</span>
                 <small><i class="fa-solid fa-user me-1"></i> Cajero: <strong>Ana López</strong></small>
             </div>
         </div>
     </nav>
 
-    <!-- Contenedor Principal del Mostrador POS -->
-    <div class="container-fluid my-4">
-        <div class="row g-3">
-            <!-- Columna Izquierda: Búsqueda y Carrito -->
-            <div class="col-lg-8">
-                <!-- Tarjeta de Búsqueda / Código de Barras -->
-                <div class="card shadow-sm border-0 mb-3">
-                    <div class="card-body">
-                        <label for="buscarSku" class="form-label fw-semibold text-secondary">
-                            <i class="fa-solid fa-barcode me-1"></i> Búsqueda SKU / Código de Barras
-                        </label>
-                        <div class="input-group input-group-lg">
-                            <input type="text" id="buscarSku" class="form-control" placeholder="Escanee o ingrese código (Ej: TORN-38)..." autofocus>
-                            <button class="btn btn-warning fw-bold px-4 text-dark" type="button">
-                                <i class="fa-solid fa-plus me-1"></i> Agregar
-                            </button>
+    <!-- Contenedor con Pestañas de Navegación -->
+    <div class="container-fluid my-3">
+        <ul class="nav nav-tabs nav-fill bg-white rounded shadow-sm p-2 mb-3" id="posTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active fw-bold" id="mostrador-tab" data-bs-toggle="tab" data-bs-target="#mostrador" type="button" role="tab">
+                    <i class="fa-solid fa-cash-register me-2 text-warning"></i>1. Mostrador POS
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold" id="inventario-tab" data-bs-toggle="tab" data-bs-target="#inventario" type="button" role="tab">
+                    <i class="fa-solid fa-boxes-stacked me-2 text-primary"></i>2. Inventario & Stock
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link fw-bold" id="reportes-tab" data-bs-toggle="tab" data-bs-target="#reportes" type="button" role="tab">
+                    <i class="fa-solid fa-chart-line me-2 text-success"></i>3. Reportes de Venta
+                </button>
+            </li>
+        </ul>
+
+        <div class="tab-content" id="posTabsContent">
+            
+            <!-- PESTAÑA 1: MOSTRADOR POS -->
+            <div class="tab-pane fade show active" id="mostrador" role="tabpanel">
+                <div class="row g-3">
+                    <!-- Columna Izquierda: Búsqueda y Carrito -->
+                    <div class="col-lg-8">
+                        <div class="card shadow-sm border-0 mb-3">
+                            <div class="card-body">
+                                <label for="buscarSku" class="form-label fw-semibold text-secondary">
+                                    <i class="fa-solid fa-barcode me-1"></i> Búsqueda SKU / Código de Barras
+                                </label>
+                                <div class="input-group input-group-lg">
+                                    <input type="text" id="buscarSku" class="form-control" placeholder="Escanee o ingrese código (Ej: TORN-38)..." autofocus>
+                                    <button class="btn btn-warning fw-bold px-4 text-dark" type="button">
+                                        <i class="fa-solid fa-plus me-1"></i> Agregar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card shadow-sm border-0">
+                            <div class="card-header bg-white py-3">
+                                <h5 class="card-title m-0 fw-bold text-secondary">
+                                    <i class="fa-solid fa-cart-shopping me-2"></i>Detalle de la Venta Actual
+                                </h5>
+                            </div>
+                            <div class="card-body p-0 table-responsive">
+                                <table class="table table-hover align-middle mb-0">
+                                    <thead class="table-dark">
+                                        <tr>
+                                            <th>SKU</th>
+                                            <th>Descripción del Artículo</th>
+                                            <th class="text-center" style="width: 120px;">Cant.</th>
+                                            <th class="text-end">P. Unitario</th>
+                                            <th class="text-end">Subtotal</th>
+                                            <th class="text-center">Acción</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><code>TORN-38</code></td>
+                                            <td>Tornillo de Acero Galvanizado 3/8"</td>
+                                            <td class="text-center">
+                                                <input type="number" class="form-control form-control-sm text-center" value="10" min="1">
+                                            </td>
+                                            <td class="text-end">$2,500</td>
+                                            <td class="text-end">$25,000</td>
+                                            <td class="text-center">
+                                                <button class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columna Derecha: Resumen de Cuenta -->
+                    <div class="col-lg-4">
+                        <div class="card shadow-sm border-0">
+                            <div class="card-body">
+                                <h5 class="fw-bold mb-3 text-secondary">Resumen de Cuenta</h5>
+                                
+                                <div class="d-flex justify-content-between mb-2">
+                                    <span>Subtotal:</span>
+                                    <strong>$21,008</strong>
+                                </div>
+                                <div class="d-flex justify-content-between mb-3">
+                                    <span>IVA (19%):</span>
+                                    <strong>$3,992</strong>
+                                </div>
+
+                                <div class="p-3 bg-light border rounded mb-4 text-end">
+                                    <span class="text-muted small text-uppercase fw-bold d-block">Total a Pagar</span>
+                                    <span class="fs-2 fw-bold text-success">$25,000</span>
+                                </div>
+
+                                <div class="d-grid gap-2">
+                                    <button class="btn btn-warning btn-lg fw-bold py-3 shadow-sm text-dark" type="button" data-bs-toggle="modal" data-bs-target="#modalCobro">
+                                        <i class="fa-solid fa-credit-card me-2"></i> COBRAR (F1)
+                                    </button>
+                                    <button class="btn btn-outline-secondary btn-lg py-2" type="button">
+                                        <i class="fa-solid fa-ban me-2"></i> Cancelar Venta
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <!-- Tabla de Productos en Caja -->
+            <!-- PESTAÑA 2: GESTIÓN DE INVENTARIO -->
+            <div class="tab-pane fade" id="inventario" role="tabpanel">
                 <div class="card shadow-sm border-0">
-                    <div class="card-header bg-white py-3">
-                        <h5 class="card-title m-0 fw-bold text-secondary">
-                            <i class="fa-solid fa-cart-shopping me-2"></i>Detalle de la Venta Actual
-                        </h5>
+                    <div class="card-header bg-white py-3 d-flex justify-content-between align-items-center">
+                        <h5 class="m-0 fw-bold text-secondary"><i class="fa-solid fa-list me-2"></i>Catálogo de Productos y Alertas de Stock</h5>
+                        <button class="btn btn-primary fw-bold" type="button">
+                            <i class="fa-solid fa-plus me-1"></i> Nuevo Producto
+                        </button>
                     </div>
                     <div class="card-body p-0 table-responsive">
                         <table class="table table-hover align-middle mb-0">
                             <thead class="table-dark">
                                 <tr>
                                     <th>SKU</th>
-                                    <th>Descripción del Artículo</th>
-                                    <th class="text-center" style="width: 120px;">Cant.</th>
-                                    <th class="text-end">P. Unitario</th>
-                                    <th class="text-end">Subtotal</th>
-                                    <th class="text-center">Acción</th>
+                                    <th>Producto</th>
+                                    <th>Categoría</th>
+                                    <th class="text-center">Stock Actual</th>
+                                    <th class="text-center">Stock Mínimo</th>
+                                    <th class="text-center">Estado</th>
+                                    <th class="text-end">Precio Venta</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td><code>TORN-38</code></td>
                                     <td>Tornillo de Acero Galvanizado 3/8"</td>
-                                    <td class="text-center">
-                                        <input type="number" class="form-control form-control-sm text-center" value="10" min="1">
-                                    </td>
+                                    <td>Fijación</td>
+                                    <td class="text-center fw-bold">150</td>
+                                    <td class="text-center">50</td>
+                                    <td class="text-center"><span class="badge bg-success">Óptimo</span></td>
                                     <td class="text-end">$2,500</td>
-                                    <td class="text-end">$25,000</td>
-                                    <td class="text-center">
-                                        <button class="btn btn-outline-danger btn-sm"><i class="fa-solid fa-trash"></i></button>
-                                    </td>
+                                </tr>
+                                <tr>
+                                    <td><code>CEM-300</code></td>
+                                    <td>Cemento Gris Bulto 50kg</td>
+                                    <td>Materiales Básicos</td>
+                                    <td class="text-center fw-bold text-danger">8</td>
+                                    <td class="text-center">15</td>
+                                    <td class="text-center"><span class="badge bg-danger"><i class="fa-solid fa-triangle-exclamation me-1"></i>Stock Bajo</span></td>
+                                    <td class="text-end">$38,000</td>
+                                </tr>
+                                <tr>
+                                    <td><code>TAL-750</code></td>
+                                    <td>Taladro Percutor 1/2" 750W</td>
+                                    <td>Herramientas Eléctricas</td>
+                                    <td class="text-center fw-bold">12</td>
+                                    <td class="text-center">5</td>
+                                    <td class="text-center"><span class="badge bg-success">Óptimo</span></td>
+                                    <td class="text-end">$185,000</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -81,39 +192,45 @@
                 </div>
             </div>
 
-            <!-- Columna Derecha: Resumen y Cobro -->
-            <div class="col-lg-4">
-                <div class="card shadow-sm border-0">
-                    <div class="card-body">
-                        <h5 class="fw-bold mb-3 text-secondary">Resumen de Cuenta</h5>
-                        
-                        <div class="d-flex justify-content-between mb-2">
-                            <span>Subtotal:</span>
-                            <strong>$21,008</strong>
+            <!-- PESTAÑA 3: REPORTES DE VENTA -->
+            <div class="tab-pane fade" id="reportes" role="tabpanel">
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm bg-primary text-white p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-uppercase mb-1">Ventas del Día</h6>
+                                    <h3 class="fw-bold m-0">$1,250,000</h3>
+                                </div>
+                                <i class="fa-solid fa-dollar-sign fa-2x opacity-50"></i>
+                            </div>
                         </div>
-                        <div class="d-flex justify-content-between mb-3">
-                            <span>IVA (19%):</span>
-                            <strong>$3,992</strong>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm bg-success text-white p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-uppercase mb-1">Transacciones</h6>
+                                    <h3 class="fw-bold m-0">34 Vistas</h3>
+                                </div>
+                                <i class="fa-solid fa-receipt fa-2x opacity-50"></i>
+                            </div>
                         </div>
-
-                        <!-- Visor de Total -->
-                        <div class="p-3 bg-light border rounded mb-4 text-end">
-                            <span class="text-muted small text-uppercase fw-bold d-block">Total a Pagar</span>
-                            <span class="fs-2 fw-bold text-success">$25,000</span>
-                        </div>
-
-                        <!-- Botón para activar el Modal de Cobro -->
-                        <div class="d-grid gap-2">
-                            <button class="btn btn-warning btn-lg fw-bold py-3 shadow-sm text-dark" type="button" data-bs-toggle="modal" data-bs-target="#modalCobro">
-                                <i class="fa-solid fa-credit-card me-2"></i> COBRAR (F1)
-                            </button>
-                            <button class="btn btn-outline-secondary btn-lg py-2" type="button">
-                                <i class="fa-solid fa-ban me-2"></i> Cancelar Venta
-                            </button>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card border-0 shadow-sm bg-warning text-dark p-3">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h6 class="text-uppercase mb-1">Alertas de Reposición</h6>
+                                    <h3 class="fw-bold m-0">2 Productos</h3>
+                                </div>
+                                <i class="fa-solid fa-bell fa-2x opacity-50"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
 
@@ -128,13 +245,11 @@
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body p-4">
-                    <!-- Total grande -->
                     <div class="text-center mb-4 p-3 bg-light rounded border">
                         <span class="text-muted text-uppercase fw-bold d-block">Monto Total</span>
                         <span class="display-5 fw-bold text-success">$25,000</span>
                     </div>
 
-                    <!-- Selección Método de Pago -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Método de Pago</label>
                         <select class="form-select form-select-lg">
@@ -144,7 +259,6 @@
                         </select>
                     </div>
 
-                    <!-- Efectivo Recibido y Cambio -->
                     <div class="row g-2 mb-3">
                         <div class="col-6">
                             <label for="efectivoRecibido" class="form-label fw-semibold">Efectivo Recibido</label>
@@ -166,7 +280,7 @@
         </div>
     </div>
 
-    <!-- JS de Bootstrap (Indispensable para el funcionamiento del Modal) -->
+    <!-- JS de Bootstrap -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
